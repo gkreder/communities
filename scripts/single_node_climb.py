@@ -20,8 +20,8 @@ def get_node(name):
 def get_child(node):
     return node.split('\t|\t')[0]
 
-# def get_parent(node):
-#     return node.split('\t|\t')[1]
+def get_parent(node):
+    return node.split('\t|\t')[1]
 
 def climb(current_node, names, nodes):
     found_names = []
@@ -38,6 +38,8 @@ def climb(current_node, names, nodes):
 ################################################################################
 mapping_files = [x for x in os.listdir(raw_dir) if x.split('.')[0] != '' and x.split('.') != '..']
 lines = []
+nodes_fname_out = node_dir + mapping_files[index].replace('out', 'nodes')
+names_fname_out = node_dir + mapping_files[index].replace('out', 'names')
 with open(raw_dir + mapping_files[index]) as f:
     for line in f:
         lines.append(line.strip())
@@ -60,7 +62,25 @@ for line in nodes_temp:
 out_names = []
 out_nodes = []
 current_node = starting_node
+while current_node != '1':
+    found_names, next_node = climb(current_node, names, nodes)
+    for name in found_names:
+        out_names.append(name)
+    out_nodes.append(next_node)
+    print(next_node)
+    current_node = get_parent(next_node)
+
 found_names, next_node = climb(current_node, names, nodes)
 for name in found_names:
     out_names.append(name)
 out_nodes.append(next_node)
+
+with open(names_fname_out, 'w') as f:
+    for name in out_names:
+        print(name, file=f)
+    f.close()
+
+with open(nodes_fname_out, 'w') as f:
+    for node in out_nodes:
+        print(node, file=f)
+    f.close()

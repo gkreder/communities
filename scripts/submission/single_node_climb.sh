@@ -13,8 +13,8 @@
 #$ -t 1-96
 
 source activate centrifuge
-cd ../../data/db_cleaned/fasta_cleaned
-array=(*)
-index=$(($SGE_TASK_ID-1))
+# cd ../../data/db_cleaned/fasta_cleaned
+# array=(*)
+# index=$(($SGE_TASK_ID-1))
 cd ..
-python -W ignore make_dmp.py ${array[$index]}
+python single_node_climb.py $((SGE_TASK_ID-1))
