@@ -10,7 +10,7 @@
 #$ -l arch=linux-x64
 #$ -l netapp=8G,scratch=8G
 #$ -l h_rt=48:00:00
-#$ -t 1-96
+#$ -t 1-97
 
 source activate centrifuge
 cd ../../data/db_cleaned/fasta_cleaned

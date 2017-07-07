@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import os
 import sys
-scripts_dir = os.getcwd()
-submissions_dir = scripts_dir + '/submission/'
+scripts_dir = os.getcwd() + '/..'
+submissions_dir = scripts_dir + '/cluster_submission/'
 data_dir = scripts_dir + '/../data/'
 top_dir = data_dir + 'db_cleaned/'
 fasta_dir = top_dir + 'fasta_raw/'

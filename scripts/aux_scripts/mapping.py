@@ -35,15 +35,17 @@ def seqid_taxid_map(fname_out):
         fasta_fname = lines[1]
         taxid = lines[7].strip().split('\t|\t')[0]
         with open(clean_dir + fasta_fname) as f:
+            header_lines = []
             for line in f:
                 if line[0] == '>':
-                    break
+                    header_lines.append(line)
             f.close()
-        if '|' in line:
-            seqid = '|'.join(line[1 : ].split('|')[0 : 2])
-        else:
-            seqid = line[1 : ].split(' ')[0]
-        pairs.append((seqid, taxid))
+        for line in header_lines:
+            if '|' in line:
+                seqid = '|'.join(line[1 : ].split('|')[0 : 2])
+            else:
+                seqid = line[1 : ].split(' ')[0]
+            pairs.append((seqid, taxid))
 
     os.chdir(top_dir)
     with open(fname_out, 'w') as f:
