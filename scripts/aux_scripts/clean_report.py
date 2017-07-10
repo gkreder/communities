@@ -1,7 +1,7 @@
 import sys
 import os
 
-scripts_dir = os.getcwd()
+scripts_dir = os.getcwd() + '/..'
 top_dir = scripts_dir + '/../data/db_cleaned/'
 raw_dir = top_dir + 'dmp/raw_mappings/'
 mapped_dir = top_dir + 'dmp/clean_mappings/'
